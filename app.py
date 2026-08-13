@@ -5,7 +5,6 @@ Streamlit app to convert a QuPath GeoJSON export into a Leica LMD7 shapes.xml.
 import os
 import tempfile
 
-import matplotlib.pyplot as plt
 import streamlit as st
 
 from convert_qupath_lmd import load_geojson, save_as_xml
@@ -59,17 +58,6 @@ if missing:
 if polygons.empty:
     st.error("No polygon shapes found in the GeoJSON.")
     st.stop()
-
-# Draw the shapes and calibration points so the user can check them
-figure, axes = plt.subplots()
-polygons.plot(ax=axes, edgecolor="black", facecolor="none")
-points.plot(ax=axes, color="red", marker="x")
-for _, row in points.iterrows():
-    axes.annotate(row.get("name", ""), (row["geometry"].x, row["geometry"].y))
-axes.set_aspect("equal")
-axes.invert_yaxis()  # image-space y points down
-axes.set_title("Preview (image space)")
-st.pyplot(figure)
 
 if st.button("Convert to shapes.xml", type="primary"):
     with tempfile.TemporaryDirectory() as folder:
