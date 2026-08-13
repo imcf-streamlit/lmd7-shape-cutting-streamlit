@@ -1,0 +1,19 @@
+[project]
+name = "lmd7-shape-cutting-streamlit"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[dependencies]
+python = ">=3.10,<3.13"
+numpy = "<=2.1.0"
+matplotlib = "*"
+lxml = "*"
+geopandas = "*"
+shapely = "*"
+streamlit = "*"
+
+[pypi-dependencies]
+py-lmd = "*"
+
+[tasks]
+app = "streamlit run app.py"

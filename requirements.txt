@@ -1,0 +1,8 @@
+streamlit>=1.32
+geopandas>=0.14
+pyogrio>=0.7
+shapely>=2.0
+numpy<=2.1.0
+py-lmd
+lxml
+matplotlib
