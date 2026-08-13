@@ -15,19 +15,17 @@ st.title("✂️ LMD7 Shape Cutting")
 st.write(
     "Upload a GeoJSON exported from QuPath (containing the T1/T2/T3 "
     "calibration points and your drawn shapes) to generate a `shapes.xml` "
-    "file ready for import on the LMD7. This app was developed by the IMCF of the University of Basel." \
+    "file ready for import on the LMD7. This app was developed by the IMCF of the University of Basel."
     " More detailed instructions can be found in the [README](https://github.com/imcf-streamlit/lmd7-shape-cutting-streamlit)."
 )
 
 with st.expander("How to prepare the GeoJSON in QuPath"):
-    st.markdown(
-        """
+    st.markdown("""
         1. Add three **Points** annotations on the calibration crosses,
            named `T1`, `T2`, `T3`.
         2. Draw your shapes with the **Polygon** tool.
         3. `File → Export objects as GeoJSON`, choose **All objects**.
-        """
-    )
+        """)
 
 uploaded = st.file_uploader("GeoJSON file", type=["geojson", "json"])
 
@@ -42,12 +40,12 @@ except Exception as error:
     st.stop()
 
 st.subheader("Annotations found")
-st.write(f"{len(points)} point(s), {len(polygons)} polygon(s)")
+st.write(f"{len(points)} point(s), {len(polygons)} polygon(s)")  # type: ignore
 with st.expander("Details"):
-    st.code("\n".join(descriptions) or "(none)")
+    st.code("\n".join(descriptions) or "(none)")  # type: ignore
 
 # Check the three calibration points are present before going further
-point_names = list(points["name"]) if "name" in points else []
+point_names = list(points["name"]) if "name" in points else []  # type: ignore
 missing = [name for name in ("T1", "T2", "T3") if name not in point_names]
 if missing:
     st.error(
@@ -56,7 +54,7 @@ if missing:
     )
     st.stop()
 
-if polygons.empty:
+if polygons.empty:  # type: ignore
     st.error("No polygon shapes found in the GeoJSON.")
     st.stop()
 
@@ -64,7 +62,7 @@ if st.button("Convert to shapes.xml", type="primary"):
     with tempfile.TemporaryDirectory() as folder:
         output_path = os.path.join(folder, "shapes.xml")
         try:
-            save_as_xml(points, polygons, output_path)
+            save_as_xml(points, polygons, output_path)  # type: ignore
         except ValueError as error:
             st.error(str(error))
             st.stop()
@@ -72,7 +70,7 @@ if st.button("Convert to shapes.xml", type="primary"):
         with open(output_path, "rb") as xml_file:
             xml_content = xml_file.read()
 
-    st.success(f"Converted {len(polygons)} shape(s).")
+    st.success(f"Converted {len(polygons)} shape(s).")  # type: ignore
     st.download_button(
         "Download shapes.xml",
         data=xml_content,
