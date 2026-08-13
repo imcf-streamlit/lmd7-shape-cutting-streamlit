@@ -4,7 +4,6 @@ A Streamlit app that turns a QuPath GeoJSON annotation export into a
 `shapes.xml` file ready for import on the Leica LMD7 laser micro-dissection
 microscope.
 
-
 ## Workflow
 
 On the **LMD7**:
