@@ -15,7 +15,7 @@ st.title("✂️ LMD7 Shape Cutting")
 st.write(
     "Upload a GeoJSON exported from QuPath (containing the T1/T2/T3 "
     "calibration points and your drawn shapes) to generate a `shapes.xml` "
-    "file ready for import on the LMD7. This app was developedby the IMCF of the University of Basel." \
+    "file ready for import on the LMD7. This app was developed by the IMCF of the University of Basel." \
     "More detailed instructions can be found in the [README](https://github.com/imcf-streamlit/lmd7-shape-cutting-streamlit)"
 )
 
