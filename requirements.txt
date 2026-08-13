@@ -5,4 +5,3 @@ shapely>=2.0
 numpy<=2.1.0
 py-lmd
 lxml
-matplotlib
